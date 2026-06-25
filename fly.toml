@@ -1,25 +1,30 @@
-app = "muinda-kubika-worker"
-primary_region = "cdg"
+# fly.toml app configuration file generated for muinda-kubika-worker on 2026-06-25T14:34:09+01:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'muinda-kubika-worker'
+primary_region = 'cdg'
 
 [build]
-  dockerfile = "Dockerfile"
+  dockerfile = 'Dockerfile'
 
 [env]
-  PYTHONUNBUFFERED = "1"
-  RABBITMQ_QUEUE = "documento.ia.queue"
-  MAX_TOTAL_MB = "100"
-  MAX_ZIP_FILES = "50"
-  MAX_TEXT_CHARS = "120000"
-  MAX_PDF_MB = "50"
-  MAX_DOCX_MB = "20"
-  MAX_IMAGE_MB = "10"
-  GIT_CLONE_DEPTH = "1"
+  GIT_CLONE_DEPTH = '1'
+  MAX_DOCX_MB = '20'
+  MAX_IMAGE_MB = '10'
+  MAX_PDF_MB = '50'
+  MAX_TEXT_CHARS = '120000'
+  MAX_TOTAL_MB = '100'
+  MAX_ZIP_FILES = '50'
+  PYTHONUNBUFFERED = '1'
+  RABBITMQ_QUEUE = 'documento.ia.queue'
 
-[mounts]
-  source = "worker_data"
-  destination = "/data"
+[[mounts]]
+  source = 'worker_data'
+  destination = '/data'
 
-[vm]
-  cpu_kind = "shared"
+[[vm]]
+  cpu_kind = 'shared'
   cpus = 1
-  memory_mb = 256
+  memory_mb = 512

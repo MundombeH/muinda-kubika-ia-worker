@@ -335,9 +335,19 @@ def on_message(ch, method, properties, body) -> None:
     try:
         send_result_to_api(result)
         ch.basic_ack(delivery_tag=method.delivery_tag)
+    except requests.HTTPError as exc:
+        status = exc.response.status_code if exc.response is not None else 0
+        if exc.response is not None:
+            body = exc.response.text
+        else:
+            body = ""
+        logger.error(
+            "API retornou HTTP %s: %s", status, body
+        )
+        ch.basic_nack(delivery_tag=method.delivery_tag, requeue=False)
     except requests.RequestException as exc:
         logger.exception(
-            "Falha ao enviar resultado para a API, recolocando na fila: %s", exc
+            "Falha de conexao ao enviar resultado para a API, recolocando na fila: %s", exc
         )
         ch.basic_nack(delivery_tag=method.delivery_tag, requeue=True)
     except Exception as exc:
