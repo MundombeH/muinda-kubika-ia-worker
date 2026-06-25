@@ -19,6 +19,7 @@ from worker.providers.claude_provider import ClaudeProvider
 from worker.providers.fallback import FallbackProvider
 from worker.providers.gemini_provider import GeminiProvider
 from worker.providers.groq_provider import GroqProvider
+from worker.providers.grok_provider import GrokProvider
 from worker.providers.openai_provider import OpenAIProvider
 from worker.utils.file_utils import get_extension
 from worker.utils.limits import Limits
@@ -274,7 +275,7 @@ def process_message(message: dict) -> dict:
     prompt = build_prompt(text, message)
 
     provider = FallbackProvider(
-        [GeminiProvider(), GroqProvider(), OpenAIProvider(), ClaudeProvider()]
+        [GeminiProvider(), GroqProvider(), GrokProvider(), OpenAIProvider(), ClaudeProvider()]
     )
 
     result = provider.generate(prompt)

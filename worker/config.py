@@ -52,6 +52,9 @@ OPENAI_MODEL = _get_optional("OPENAI_MODEL", "gpt-4o-mini")
 CLAUDE_API_KEY = _get_optional("CLAUDE_API_KEY")
 CLAUDE_MODEL = _get_optional("CLAUDE_MODEL", "claude-3-5-sonnet-20240620")
 
+GROK_API_KEY = _get_optional("GROK_API_KEY")
+GROK_MODEL = _get_optional("GROK_MODEL", "grok-2-latest")
+
 MAX_TOTAL_MB = _get_int("MAX_TOTAL_MB", 100)
 MAX_ZIP_FILES = _get_int("MAX_ZIP_FILES", 50)
 MAX_TEXT_CHARS = _get_int("MAX_TEXT_CHARS", 120000)
