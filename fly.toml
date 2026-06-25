@@ -1,0 +1,25 @@
+app = "muinda-kubika-worker"
+primary_region = "cdg"
+
+[build]
+  dockerfile = "Dockerfile"
+
+[env]
+  PYTHONUNBUFFERED = "1"
+  RABBITMQ_QUEUE = "documento.ia.queue"
+  MAX_TOTAL_MB = "100"
+  MAX_ZIP_FILES = "50"
+  MAX_TEXT_CHARS = "120000"
+  MAX_PDF_MB = "50"
+  MAX_DOCX_MB = "20"
+  MAX_IMAGE_MB = "10"
+  GIT_CLONE_DEPTH = "1"
+
+[mounts]
+  source = "worker_data"
+  destination = "/data"
+
+[vm]
+  cpu_kind = "shared"
+  cpus = 1
+  memory_mb = 256
